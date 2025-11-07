@@ -1,26 +1,26 @@
 import { Router } from "express";
 import {
-  obetenerClientes,
   getobetenerClientes,
   getClientesxId,
+  getClientePorCedula, // ✅ nuevo
   postClientes,
   putClientes,
-  patchClientes,
-  deleteClientes
+  deleteClientes,
 } from "../controladores/clientesCtrl.js";
 
-import { verifyToken } from "../jwt/verifytoken.js"; // 🔐 Importamos el middleware de verificación
+import { verifyToken } from "../jwt/verifytoken.js";
 
 const router = Router();
 
-// 🧩 Rutas protegidas con verifyToken
-router.get("/clientes", verifyToken, getobetenerClientes); // obtener todos
-router.get("/clientes/:id", verifyToken, getClientesxId);  // obtener por id
+// ✅ Ruta nueva para buscar por cédula
+router.get("/cedula/:cedula", verifyToken, getClientePorCedula);
 
-// 🔓 Rutas abiertas (puedes protegerlas también si quieres)
-router.post("/clientes", verifyToken,postClientes);  // insertar
-router.put("/clientes/:id",verifyToken, putClientes);  // actualizar completo
-router.patch("/clientes/:id", verifyToken,patchClientes); // actualizar parcial
-router.delete("/clientes/:id",verifyToken, deleteClientes); // eliminar
+// ✅ Rutas existentes
+router.get("/", verifyToken, getobetenerClientes);
+router.get("/:id", verifyToken, getClientesxId);
+router.post("/", verifyToken, postClientes);
+router.put("/:id", verifyToken, putClientes);
+router.delete("/:id", verifyToken, deleteClientes);
 
 export default router;
+
