@@ -34,7 +34,7 @@ app.use(express.json()); // interpretar objetos JSON
 app.use(express.urlencoded({ extended: true })); // para formularios
 
 // Servir archivos estáticos (imágenes, etc.)
-app.use('/uploads', express.static(path.join(__dirname, 'src/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Rutas principales
 app.use('/api/clientes', clientesRoutes);
